@@ -24,7 +24,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.example.application1.Main</mainClass>
+                            <mainClass>org.example.application4.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

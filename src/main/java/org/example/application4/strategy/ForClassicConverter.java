@@ -3,7 +3,7 @@ package org.example.application4.strategy;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ForClassicConverter implements com.example.application4.strategy.IGrayConverter {
+public class ForClassicConverter implements IGrayConverter {
   @Override
   public BufferedImage convert(BufferedImage input) {
     int height = input.getHeight();

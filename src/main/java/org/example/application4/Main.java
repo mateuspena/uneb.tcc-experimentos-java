@@ -6,10 +6,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
   public static void main(String[] args) throws IOException {
-    BufferedImage in = ImageIO.read(new File("C:\\Users\\Mateus\\Downloads\\foto-01.jpg"));
+    BufferedImage in = ImageIO.read(new File(args[0]));
 
 //    IGrayConverter strategy = new ForClassicConverter();
 //    IGrayConverter strategy = new ForEachConverter();
@@ -20,7 +21,7 @@ public class Main {
     BufferedImage out = strategy.convert(in);
     long end = System.currentTimeMillis();
 
-    ImageIO.write(out, "jpg", new File("C:\\Users\\Mateus\\Downloads\\foto-01-saved.jpg"));
+    ImageIO.write(out, "jpg", new File("converted-image.jpg"));
 
     System.out.println("Time elapsed: " + ((end - begin) / 1000));
   }
