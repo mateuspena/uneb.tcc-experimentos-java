@@ -1,4 +1,6 @@
-package org.example.application4.strategy;
+package org.example.application4.strategy.impl;
+
+import org.example.application4.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ForEachMethodConverter implements IGrayConverter {
+public class ForEachStreamMethodConverter implements IGrayConverter {
     @Override
     public BufferedImage convert(BufferedImage input) {
         final int height = input.getHeight();
@@ -16,7 +18,7 @@ public class ForEachMethodConverter implements IGrayConverter {
         final List<Integer> columns = IntStream.range(0, width).boxed().collect(Collectors.toList());
         final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        lines.forEach(line -> columns.forEach(column -> {
+        lines.stream().forEach(line -> columns.stream().forEach(column -> {
             Color color = new Color(input.getRGB(column, line));
             Color grayColor = grayColor(color);
 

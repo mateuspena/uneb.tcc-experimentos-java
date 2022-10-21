@@ -1,4 +1,6 @@
-package org.example.application4.strategy;
+package org.example.application4.strategy.impl;
+
+import org.example.application4.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
