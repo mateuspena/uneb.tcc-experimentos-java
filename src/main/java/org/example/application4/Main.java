@@ -1,7 +1,7 @@
 package org.example.application4;
 
-import org.example.application4.strategy.*;
-import org.example.application4.strategy.impl.ForClassicConverter;
+import org.example.application4.strategy.IGrayConverter;
+import org.example.application4.strategy.impl.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
