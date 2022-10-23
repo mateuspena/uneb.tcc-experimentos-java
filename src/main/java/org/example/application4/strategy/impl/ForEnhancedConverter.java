@@ -4,26 +4,27 @@ import org.example.application4.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-public class ForEachMethodConverter implements IGrayConverter {
+public class ForEnhancedConverter implements IGrayConverter {
     @Override
     public BufferedImage convert(BufferedImage input) {
         final int height = input.getHeight();
         final int width = input.getWidth();
-
-        final List<Integer> lines = IntStream.range(0, height).boxed().collect(Collectors.toList());
-        final List<Integer> columns = IntStream.range(0, width).boxed().collect(Collectors.toList());
         final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        lines.forEach(line -> columns.forEach(column -> {
-            Color color = new Color(input.getRGB(column, line));
+        final int[] pixels = input.getRGB(0, 0, width, height, null, 0, width);
+
+        int index = 0;
+        for (int pixel : pixels) {
+            Color color = new Color(pixel);
             Color grayColor = grayColor(color);
 
+            int line = Integer.parseInt(String.valueOf(index / width));
+            int column = Integer.parseInt(String.valueOf(index % width));
             output.setRGB(column, line, grayColor.getRGB());
-        }));
+
+            index++;
+        }
 
         return output;
     }

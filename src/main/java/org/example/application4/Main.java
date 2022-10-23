@@ -10,25 +10,30 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-  public static void main(String[] args) throws IOException, InterruptedException {
-    String filename = args[0];
-    System.out.println("Filename: " + filename);
+    public static void main(String[] args) throws IOException, InterruptedException {
+        BufferedImage in = ImageIO.read(new File(args[0]));
 
-    BufferedImage in = ImageIO.read(new File(filename));
+        IGrayConverter strategy = new ForClassicConverter();
+//        IGrayConverter strategy = new ForEachConverter();
+//        IGrayConverter strategy = new ForEnhancedConverter();
+//        IGrayConverter strategy = new IteratorConverter();
 
-    IGrayConverter strategy = new ForClassicConverter();
-//    IGrayConverter strategy = new ForEachConverter();
-//    IGrayConverter strategy = new ForEachMethodConverter();
-//    IGrayConverter strategy = new ForEachStreamMethodConverter();
+        long memoryBegin = memoryUsage();
+        long timeBegin = System.currentTimeMillis();
+        BufferedImage out = strategy.convert(in);
+        long timeEnd = System.currentTimeMillis();
+        long memoryEnd = memoryUsage();
 
-    long begin = System.currentTimeMillis();
-    BufferedImage out = strategy.convert(in);
-    long end = System.currentTimeMillis();
+        ImageIO.write(out, "jpg", new File("converted-image.jpg"));
 
-    ImageIO.write(out, "jpg", new File("converted-image.jpg"));
+        System.out.println("* Time elapsed: " + ((timeEnd - timeBegin) / 1000));
+        System.out.println("* Memory usage: " + ((memoryEnd - memoryBegin) / (1024 * 1024)));
+        TimeUnit.SECONDS.sleep(1);
+        System.exit(0);
+    }
 
-    System.out.println("Time elapsed: " + ((end - begin) / 1000));
-    TimeUnit.SECONDS.sleep(1);
-    System.exit(0);
-  }
+    private static long memoryUsage() {
+        Runtime rt = Runtime.getRuntime();
+        return rt.totalMemory() - rt.freeMemory();
+    }
 }
