@@ -10,6 +10,7 @@ org/example/application2/strategy/ForClassicFactorial.class
 org/example/application4/Main.class
 org/example/application3/strategy/IterativeFibonacci.class
 org/example/application4/strategy/impl/ForEnhancedConverter.class
+org/example/application4/strategy/impl/ForEachParallelConverter.class
 org/example/application4/strategy/impl/ForClassicConverter.class
 org/example/application1/strategy/ForEachCounter.class
 org/example/application1/strategy/ICounter.class

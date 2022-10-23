@@ -13,8 +13,9 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         BufferedImage in = ImageIO.read(new File(args[0]));
 
-        IGrayConverter strategy = new ForClassicConverter();
+//        IGrayConverter strategy = new ForClassicConverter();
 //        IGrayConverter strategy = new ForEachConverter();
+        IGrayConverter strategy = new ForEachParallelConverter();
 //        IGrayConverter strategy = new ForEnhancedConverter();
 //        IGrayConverter strategy = new IteratorConverter();
 
