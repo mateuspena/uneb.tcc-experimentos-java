@@ -24,15 +24,6 @@ public class ForClassicConverter implements IGrayConverter {
       output.setRGB(column, line, grayColor.getRGB());
     }
 
-//    for (int y = 0; y < height; y++) {
-//      for (int x = 0; x < width; x++) {
-//        Color color = new Color(input.getRGB(x, y));
-//        Color grayColor = grayColor(color);
-//
-//        output.setRGB(x, y, grayColor.getRGB());
-//      }
-//    }
-
     return output;
   }
 }
