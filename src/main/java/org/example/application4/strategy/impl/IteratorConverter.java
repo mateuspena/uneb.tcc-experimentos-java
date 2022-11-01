@@ -18,15 +18,14 @@ public class IteratorConverter implements IGrayConverter {
         final Iterator<Integer> pixelsIterator = IntStream.range(0, pixels.length).boxed().iterator();
 
         while (pixelsIterator.hasNext()) {
-            int index = pixelsIterator.next();
+            final int index = pixelsIterator.next();
 
             final Color color = new Color(pixels[index]);
             final Color grayColor = grayColor(color);
+            final int x = index % width;
+            final int y = index / width;
 
-            final int line = Integer.parseInt(String.valueOf(index / width));
-            final int column = Integer.parseInt(String.valueOf(index % width));
-
-            output.setRGB(column, line, grayColor.getRGB());
+            output.setRGB(x, y, grayColor.getRGB());
         }
 
         return output;

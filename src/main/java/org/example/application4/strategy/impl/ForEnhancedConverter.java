@@ -16,12 +16,12 @@ public class ForEnhancedConverter implements IGrayConverter {
 
         int index = 0;
         for (int pixel : pixels) {
-            Color color = new Color(pixel);
-            Color grayColor = grayColor(color);
+            final Color color = new Color(pixel);
+            final Color grayColor = grayColor(color);
+            final int x = index % width;
+            final int y = index / width;
 
-            int line = Integer.parseInt(String.valueOf(index / width));
-            int column = Integer.parseInt(String.valueOf(index % width));
-            output.setRGB(column, line, grayColor.getRGB());
+            output.setRGB(x, y, grayColor.getRGB());
 
             index++;
         }

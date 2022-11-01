@@ -14,14 +14,13 @@ public class ForClassicConverter implements IGrayConverter {
 
     final int[] pixels = input.getRGB(0, 0, width, height, null, 0, width);
 
-    for (int i = 0; i < pixels.length; i++) {
-      final Color color = new Color(pixels[i]);
+    for (int index = 0; index < pixels.length; index++) {
+      final Color color = new Color(pixels[index]);
       final Color grayColor = grayColor(color);
+      final int x = index % width;
+      final int y = index / width;
 
-      final int line = Integer.parseInt(String.valueOf(i / width));
-      final int column = Integer.parseInt(String.valueOf(i % width));
-
-      output.setRGB(column, line, grayColor.getRGB());
+      output.setRGB(x, y, grayColor.getRGB());
     }
 
     return output;
