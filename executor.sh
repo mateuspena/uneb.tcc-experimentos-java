@@ -3,26 +3,27 @@
 JAR_FILE="tcc-experimentos-java-1.0-SNAPSHOT.jar"
 JAR_PATH="/home/mateus/IdeaProjects/tcc-experimentos-java/target"
 JAR_FILEPATH="$JAR_PATH/$JAR_FILE"
-JAR_ARGS="/home/mateus/IdeaProjects/tcc-experimentos-java/assets/foto-07.jpg"
+JAR_ARGS=$1
 
 JOULAR_FILE="joularjx-1.0.jar"
 JOULAR_PATH="/opt/joularjx"
 JOULAR_FILEPATH="$JOULAR_PATH/$JOULAR_FILE"
 
-cd $JOULAR_PATH
+cd $JOULAR_PATH || exit;
 
-for i in $(seq 1 10); 
+echo "energy;memory;time";
+for i in $(seq 1 3);
     do
         sudo rm -f *.csv *.jpg *.log;
         sudo touch executor.log;
         sudo chmod 666 executor.log;
         sudo java -javaagent:$JOULAR_FILEPATH -jar $JAR_FILEPATH $JAR_ARGS > executor.log;
 
-        echo "Seq: $i";
-        cat *-methods-energy-filtered.csv;
-        cat executor.log | grep "Time elapsed";
-        cat executor.log | grep "Memory usage";
-        echo "---------------";
+        ENERGY=$(cat *-methods-energy-filtered.csv);
+        MEMORY=$(grep "Memory usage" executor.log);
+        TIME=$(grep "Time elapsed" executor.log);
+
+        echo "${ENERGY#*,};${MEMORY#*: };${TIME#*: }"
     done
 
 sudo rm -f *.csv *.jpg *.log;
