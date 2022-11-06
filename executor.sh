@@ -12,9 +12,9 @@ JOULAR_FILEPATH="$JOULAR_PATH/$JOULAR_FILE"
 cd $JOULAR_PATH || exit;
 
 echo "energy;memory;time";
-for i in $(seq 1 10);
+for i in $(seq 1 100);
     do
-        sudo rm -f *.csv *.jpg *.log;
+        sudo rm -f *.csv *.jpg *.txt *.log;
         sudo touch executor.log;
         sudo chmod 666 executor.log;
         sudo java -javaagent:$JOULAR_FILEPATH -jar $JAR_FILEPATH $JAR_ARGS > executor.log;
@@ -26,4 +26,4 @@ for i in $(seq 1 10);
         echo "${ENERGY#*,};${MEMORY#*: };${TIME#*: }"
     done
 
-sudo rm -f *.csv *.jpg *.log;
+sudo rm -f *.csv *.jpg *.txt *.log;
