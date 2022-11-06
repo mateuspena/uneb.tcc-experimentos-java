@@ -1,12 +1,12 @@
-package org.example.application4.strategy.impl;
+package io.github.mateuspena.app1.strategy.impl;
 
-import org.example.application4.strategy.IGrayConverter;
+import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.stream.IntStream;
 
-public class ForEachParallelConverter implements IGrayConverter {
+public class ForEachConverter implements IGrayConverter {
     @Override
     public BufferedImage convert(BufferedImage input) {
         final int height = input.getHeight();
@@ -15,7 +15,7 @@ public class ForEachParallelConverter implements IGrayConverter {
 
         final int[] pixels = input.getRGB(0, 0, width, height, null, 0, width);
 
-        IntStream.range(0, pixels.length).boxed().toList().parallelStream().forEach(index -> {
+        IntStream.range(0, pixels.length).boxed().toList().forEach(index -> {
             final Color color = new Color(pixels[index]);
             final Color grayColor = grayColor(color);
             final int x = index % width;

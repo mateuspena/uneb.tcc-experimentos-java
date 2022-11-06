@@ -1,4 +1,4 @@
-package org.example.application4.strategy;
+package io.github.mateuspena.app1.strategy;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

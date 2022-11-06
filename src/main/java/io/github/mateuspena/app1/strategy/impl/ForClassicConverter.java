@@ -1,6 +1,6 @@
-package org.example.application4.strategy.impl;
+package io.github.mateuspena.app1.strategy.impl;
 
-import org.example.application4.strategy.IGrayConverter;
+import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

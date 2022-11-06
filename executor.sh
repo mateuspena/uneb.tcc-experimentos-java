@@ -12,7 +12,7 @@ JOULAR_FILEPATH="$JOULAR_PATH/$JOULAR_FILE"
 cd $JOULAR_PATH || exit;
 
 echo "energy;memory;time";
-for i in $(seq 1 3);
+for i in $(seq 1 10);
     do
         sudo rm -f *.csv *.jpg *.log;
         sudo touch executor.log;
