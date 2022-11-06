@@ -5,8 +5,6 @@ import io.github.mateuspena.app2.domain.FileAccessor;
 import io.github.mateuspena.app2.strategy.IBatchFactorial;
 
 import java.io.IOException;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SingleBatchFactorial implements IBatchFactorial {
@@ -15,10 +13,10 @@ public class SingleBatchFactorial implements IBatchFactorial {
         FileAccessor input = new FileAccessor(file);
         FileAccessor output = new FileAccessor("output.txt");
 
-        List<String> numbers = input.readLines();
-        List<BigInteger> factorials = new ArrayList<>(numbers.size());
-        for (String number : numbers) {
-            factorials.add(FactorialCalculator.calculate(number));
+        String[] numbers = input.readLines();
+        String[] factorials = new String[ numbers.length ];
+        for (int i = 0; i < numbers.length; i++) {
+            factorials[i] = FactorialCalculator.calculate(numbers[i]).toString();
         }
 
         output.writeLines(factorials);

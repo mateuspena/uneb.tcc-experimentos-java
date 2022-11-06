@@ -1,55 +1,33 @@
 package io.github.mateuspena.app2.domain;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class FileAccessor {
-    private final File file;
+    private final String filepath;
 
     public FileAccessor(String filepath) {
-        file = new File(filepath);
+        this.filepath = filepath;
     }
 
-    public Scanner getFileReader() throws IOException {
-        return new Scanner(file);
+    public BufferedReader reader() throws IOException {
+        return new BufferedReader(new FileReader(filepath));
     }
 
-    public FileWriter getFileWriter() throws IOException {
-        return new FileWriter(file);
+    public BufferedWriter writer() throws IOException {
+        return new BufferedWriter(new FileWriter(filepath));
     }
 
-    public String readLine(Scanner fileReader) {
-        return fileReader.hasNext() ? fileReader.nextLine() : null;
-    }
-
-    public List<String> readLines() throws IOException {
-        List<String> lines = new ArrayList<>();
-
-        Scanner reader = getFileReader();
-        String line;
-        while (null != (line = readLine(reader))) {
-            lines.add(line);
-        }
-
+    public String[] readLines() throws IOException {
+        BufferedReader reader = reader();
+        String[] lines = reader.lines().toArray(String[]::new);
         reader.close();
         return lines;
     }
 
-    public void writeLine(FileWriter fileWriter, Object line) throws IOException {
-        fileWriter.write(String.valueOf(line).concat("\n"));
-    }
-
-    public void writeLines(List<?> lines) throws IOException {
-        FileWriter writer = getFileWriter();
-
-        for (Object line : lines) {
-            writeLine(writer, line);
-        }
-
+    public void writeLines(String[] lines) throws IOException {
+        BufferedWriter writer = writer();
+        writer.write(String.join("\n", lines));
         writer.close();
     }
-
 
 }
