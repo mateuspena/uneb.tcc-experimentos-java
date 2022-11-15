@@ -7,34 +7,32 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        BufferedImage in = ImageIO.read(new File(args[0]));
-
-        IGrayConverter strategy = new ForClassicConverter();
-//        IGrayConverter strategy = new ForEnhancedConverter();
+//        IGrayConverter strategy = new ForClassicConverter();
 //        IGrayConverter strategy = new ForEachConverter();
 //        IGrayConverter strategy = new ForEachParallelConverter();
-//        IGrayConverter strategy = new IteratorConverter();
+//        IGrayConverter strategy = new ForEnhancedConverter();
+        IGrayConverter strategy = new IteratorConverter();
 
-        long memoryBegin = memoryUsage();
-        long timeBegin = System.currentTimeMillis();
+        BufferedImage in = ImageIO.read(new File(args[0]));
         BufferedImage out = strategy.convert(in);
-        long timeEnd = System.currentTimeMillis();
-        long memoryEnd = memoryUsage();
-
         ImageIO.write(out, "jpg", new File("converted-image.jpg"));
 
-        System.out.println("* Time elapsed: " + ((timeEnd - timeBegin) / 1000));
-        System.out.println("* Memory usage: " + ((memoryEnd - memoryBegin) / (1024 * 1024)));
+        System.out.println("* Time elapsed (2): " + timeUsageInSeconds());
+        System.out.println("* Memory usage (2): " + memoryUsageInMegabytes());
         TimeUnit.SECONDS.sleep(1);
         System.exit(0);
     }
 
-    private static long memoryUsage() {
-        Runtime rt = Runtime.getRuntime();
-        return rt.totalMemory() - rt.freeMemory();
+    private static long timeUsageInSeconds() {
+        return ManagementFactory.getThreadMXBean().getCurrentThreadCpuTime() / (1000 * 1000 * 1000);
+    }
+
+    private static long memoryUsageInMegabytes() {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed() / (1024 * 1024);
     }
 }
