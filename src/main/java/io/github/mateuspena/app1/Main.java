@@ -22,8 +22,8 @@ public class Main {
         BufferedImage out = strategy.convert(in);
         ImageIO.write(out, "jpg", new File("converted-image.jpg"));
 
-        System.out.println("* Time elapsed (2): " + timeUsageInSeconds());
-        System.out.println("* Memory usage (2): " + memoryUsageInMegabytes());
+        System.out.println("* Time elapsed: " + timeUsageInSeconds());
+        System.out.println("* Memory usage: " + memoryUsageInMegabytes());
         TimeUnit.SECONDS.sleep(1);
         System.exit(0);
     }
