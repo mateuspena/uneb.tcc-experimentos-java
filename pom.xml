@@ -24,7 +24,8 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.github.mateuspena.app1.Main</mainClass>
+<!--                            <mainClass>io.github.mateuspena.app1.Main</mainClass>-->
+                            <mainClass>io.github.mateuspena.app2.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

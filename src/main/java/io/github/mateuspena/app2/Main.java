@@ -14,13 +14,13 @@ import static io.github.mateuspena.app2.domain.TextFile.writeLines;
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-//        IFactorialCalculator strategy = new ForClassicCalculator();
+        IFactorialCalculator strategy = new ForClassicCalculator();
 //        IFactorialCalculator strategy = new ForEnhancedCalculator();
 //        IFactorialCalculator strategy = new ForEachCalculator();
 //        IFactorialCalculator strategy = new ForEachParallelCalculator();
-        IFactorialCalculator strategy = new IteratorCalculator();
+//        IFactorialCalculator strategy = new IteratorCalculator();
 
-        List<String> numbers = readLines("resources/app2.txt");
+        List<String> numbers = readLines(args[0]);
         writeLines("converted-numbers.txt", strategy.calculateAll(numbers));
 
         System.out.println("* Time elapsed: " + timeElapsedInSeconds());
