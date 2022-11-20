@@ -1,7 +1,7 @@
 package io.github.mateuspena.app1;
 
 import io.github.mateuspena.app1.strategy.IGrayConverter;
-import io.github.mateuspena.app1.strategy.impl.*;
+import io.github.mateuspena.app1.strategy.impl.IteratorConverter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -22,13 +22,13 @@ public class Main {
         BufferedImage out = strategy.convert(in);
         ImageIO.write(out, "jpg", new File("converted-image.jpg"));
 
-        System.out.println("* Time elapsed: " + timeUsageInSeconds());
+        System.out.println("* Time elapsed: " + timeElapsedInSeconds());
         System.out.println("* Memory usage: " + memoryUsageInMegabytes());
         TimeUnit.SECONDS.sleep(1);
         System.exit(0);
     }
 
-    private static long timeUsageInSeconds() {
+    private static long timeElapsedInSeconds() {
         return ManagementFactory.getThreadMXBean().getCurrentThreadCpuTime() / (1000 * 1000 * 1000);
     }
 

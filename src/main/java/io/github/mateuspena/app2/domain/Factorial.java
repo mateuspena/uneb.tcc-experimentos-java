@@ -2,7 +2,7 @@ package io.github.mateuspena.app2.domain;
 
 import java.math.BigInteger;
 
-public abstract class FactorialCalculator {
+public abstract class Factorial {
 
     public static BigInteger calculate(String number) {
         return calculate(Long.parseLong(number));

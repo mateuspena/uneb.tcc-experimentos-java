@@ -1,33 +1,39 @@
 package io.github.mateuspena.app2;
 
-import io.github.mateuspena.app2.strategy.IBatchFactorial;
+import io.github.mateuspena.app2.strategy.IFactorialCalculator;
 import io.github.mateuspena.app2.strategy.impl.*;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static io.github.mateuspena.app2.domain.TextFile.readLines;
+import static io.github.mateuspena.app2.domain.TextFile.writeLines;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        String file = args[0];
+//        IFactorialCalculator strategy = new ForClassicCalculator();
+//        IFactorialCalculator strategy = new ForEnhancedCalculator();
+//        IFactorialCalculator strategy = new ForEachCalculator();
+//        IFactorialCalculator strategy = new ForEachParallelCalculator();
+        IFactorialCalculator strategy = new IteratorCalculator();
 
-//        IBatchFactorial strategy = new MultipleBatchFactorial();
-        IBatchFactorial strategy = new SingleBatchFactorial();
+        List<String> numbers = readLines("resources/app2.txt");
+        writeLines("converted-numbers.txt", strategy.calculateAll(numbers));
 
-        long memoryBegin = memoryUsage();
-        long timeBegin = System.currentTimeMillis();
-        strategy.calculateAll(file);
-        long timeEnd = System.currentTimeMillis();
-        long memoryEnd = memoryUsage();
-
-        System.out.println("* Time elapsed: " + ((timeEnd - timeBegin) / 1000));
-        System.out.println("* Memory usage: " + ((memoryEnd - memoryBegin) / (1024 * 1024)));
+        System.out.println("* Time elapsed: " + timeElapsedInSeconds());
+        System.out.println("* Memory usage: " + memoryUsageInMegabytes());
         TimeUnit.SECONDS.sleep(1);
         System.exit(0);
     }
 
-    private static long memoryUsage() {
-        Runtime rt = Runtime.getRuntime();
-        return rt.totalMemory() - rt.freeMemory();
+    private static long timeElapsedInSeconds() {
+        return ManagementFactory.getThreadMXBean().getCurrentThreadCpuTime() / (1000 * 1000 * 1000);
+    }
+
+    private static long memoryUsageInMegabytes() {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage().getUsed() / (1024 * 1024);
     }
 }
