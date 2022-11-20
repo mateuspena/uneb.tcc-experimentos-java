@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ForEachCalculator implements IFactorialCalculator {
-    @Override
-    public List<String> calculateAll(List<String> numbers) {
-        final List<String> factorials = new ArrayList<>();
+  @Override
+  public List<String> calculateAll(List<String> numbers) {
+    final List<String> factorials = new ArrayList<>();
 
-        numbers.forEach(number -> factorials.add(Factorial.calculate(number).toString()));
+    numbers.forEach(number -> factorials.add(Factorial.calculate(number).toString()));
 
-        return factorials;
-    }
+    return factorials;
+  }
 }
