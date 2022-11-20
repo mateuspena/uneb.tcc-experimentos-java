@@ -15,9 +15,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         IFactorialCalculator strategy = new ForClassicCalculator();
-//        IFactorialCalculator strategy = new ForEnhancedCalculator();
 //        IFactorialCalculator strategy = new ForEachCalculator();
 //        IFactorialCalculator strategy = new ForEachParallelCalculator();
+//        IFactorialCalculator strategy = new ForEnhancedCalculator();
 //        IFactorialCalculator strategy = new IteratorCalculator();
 
         List<String> numbers = readLines(args[0]);
