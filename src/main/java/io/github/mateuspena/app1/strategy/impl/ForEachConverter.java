@@ -5,6 +5,7 @@ import io.github.mateuspena.app1.strategy.IGrayConverter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ForEachConverter implements IGrayConverter {
   @Override
@@ -13,20 +14,16 @@ public class ForEachConverter implements IGrayConverter {
     final int width = input.getWidth();
     final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-    final List<Integer> pixels = imagePixels(input);
+    final int size = height * width;
+    IntStream.range(0, size).forEach(index -> {
+      final int x = index % width;
+      final int y = index / width;
+      final int pixel = input.getRGB(x,y);
 
-    final int[] i = {0};
-    pixels.forEach(
-        pixel -> {
-          final int index = i[0]++;
-
-          final Color color = new Color(pixel);
-          final Color grayColor = grayColor(color);
-          final int x = index % width;
-          final int y = index / width;
-
-          output.setRGB(x, y, grayColor.getRGB());
-        });
+      final Color color = new Color(pixel);
+      final Color grayColor = grayColor(color);
+      output.setRGB(x, y, grayColor.getRGB());
+    });
 
     return output;
   }

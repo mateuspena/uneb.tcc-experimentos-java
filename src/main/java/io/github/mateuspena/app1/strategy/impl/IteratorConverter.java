@@ -4,8 +4,10 @@ import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class IteratorConverter implements IGrayConverter {
   @Override
@@ -14,18 +16,17 @@ public class IteratorConverter implements IGrayConverter {
     final int width = input.getWidth();
     final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-    final List<Integer> pixels = imagePixels(input);
-    final Iterator<Integer> iter = pixels.iterator();
-
-    final int[] i = {0};
+    final int size = height * width;
+    final Iterator<Integer> iter = IntStream.range(0, size).iterator();
     while (iter.hasNext()) {
-      final int index = i[0]++;
+      final int index = iter.next();
 
-      final Color color = new Color(iter.next());
-      final Color grayColor = grayColor(color);
       final int x = index % width;
       final int y = index / width;
+      final int pixel = input.getRGB(x,y);
 
+      final Color color = new Color(pixel);
+      final Color grayColor = grayColor(color);
       output.setRGB(x, y, grayColor.getRGB());
     }
 

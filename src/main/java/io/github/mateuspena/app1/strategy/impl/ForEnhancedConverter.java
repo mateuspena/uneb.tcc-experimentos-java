@@ -4,7 +4,9 @@ import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ForEnhancedConverter implements IGrayConverter {
   @Override
@@ -13,17 +15,14 @@ public class ForEnhancedConverter implements IGrayConverter {
     final int width = input.getWidth();
     final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-    final List<Integer> pixels = imagePixels(input);
-
-    final int[] i = {0};
-    for (int pixel : pixels) {
-      final int index = i[0]++;
+    final int size = height * width;
+    for (int index : IntStream.range(0, size).toArray()) {
+      final int x = index % width;
+      final int y = index / width;
+      final int pixel = input.getRGB(x,y);
 
       final Color color = new Color(pixel);
       final Color grayColor = grayColor(color);
-      final int x = index % width;
-      final int y = index / width;
-
       output.setRGB(x, y, grayColor.getRGB());
     }
 

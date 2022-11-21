@@ -13,11 +13,11 @@ import static io.github.mateuspena.app1.domain.ImageFile.writeImage;
 
 public class Main {
   public static void main(String[] args) throws IOException, InterruptedException {
-    IGrayConverter strategy = new ForClassicConverter();
+//    IGrayConverter strategy = new ForClassicConverter();
 //    IGrayConverter strategy = new ForEachConverter();
 //    IGrayConverter strategy = new ForEachParallelConverter();
 //    IGrayConverter strategy = new ForEnhancedConverter();
-//    IGrayConverter strategy = new IteratorConverter();
+    IGrayConverter strategy = new IteratorConverter();
 
     BufferedImage in = readImage(args[0]);
     writeImage("converted-image.jpg", strategy.convert(in));
