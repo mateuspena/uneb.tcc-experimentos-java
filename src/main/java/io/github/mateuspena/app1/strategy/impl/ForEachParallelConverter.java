@@ -4,7 +4,6 @@ import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class ForEachParallelConverter implements IGrayConverter {

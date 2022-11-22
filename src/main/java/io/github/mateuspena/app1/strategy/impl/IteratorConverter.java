@@ -4,9 +4,7 @@ import io.github.mateuspena.app1.strategy.IGrayConverter;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class IteratorConverter implements IGrayConverter {
