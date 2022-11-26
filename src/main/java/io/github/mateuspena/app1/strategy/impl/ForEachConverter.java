@@ -14,15 +14,17 @@ public class ForEachConverter implements IGrayConverter {
     final BufferedImage output = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
     final int size = height * width;
-    IntStream.range(0, size).forEach(index -> {
-      final int x = index % width;
-      final int y = index / width;
-      final int pixel = input.getRGB(x,y);
+    IntStream.range(0, size)
+        .forEach(
+            index -> {
+              final int x = index % width;
+              final int y = index / width;
+              final int pixel = input.getRGB(x, y);
 
-      final Color color = new Color(pixel);
-      final Color grayColor = grayColor(color);
-      output.setRGB(x, y, grayColor.getRGB());
-    });
+              final Color color = new Color(pixel);
+              final Color grayColor = grayColor(color);
+              output.setRGB(x, y, grayColor.getRGB());
+            });
 
     return output;
   }

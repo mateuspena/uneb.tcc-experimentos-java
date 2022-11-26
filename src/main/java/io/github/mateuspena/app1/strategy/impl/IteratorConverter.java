@@ -21,7 +21,7 @@ public class IteratorConverter implements IGrayConverter {
 
       final int x = index % width;
       final int y = index / width;
-      final int pixel = input.getRGB(x,y);
+      final int pixel = input.getRGB(x, y);
 
       final Color color = new Color(pixel);
       final Color grayColor = grayColor(color);

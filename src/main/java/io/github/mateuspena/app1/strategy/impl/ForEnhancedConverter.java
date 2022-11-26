@@ -17,7 +17,7 @@ public class ForEnhancedConverter implements IGrayConverter {
     for (int index : IntStream.range(0, size).toArray()) {
       final int x = index % width;
       final int y = index / width;
-      final int pixel = input.getRGB(x,y);
+      final int pixel = input.getRGB(x, y);
 
       final Color color = new Color(pixel);
       final Color grayColor = grayColor(color);

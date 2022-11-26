@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImageFile {
+public abstract class ImageFile {
   public static BufferedImage readImage(String filepath) throws IOException {
     return ImageIO.read(new File(filepath));
   }
